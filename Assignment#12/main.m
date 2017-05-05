@@ -21,8 +21,9 @@ int main(int argc, const char * argv[]) {
         NSLog(@"Please pick your pizza size and toppings:");
         
         Kitchen *restaurantKitchen = [Kitchen new];
-        FirstManager *fm = [FirstManager new];
-        SecondManager *sm = [SecondManager new];
+        DeliveryService *ds = [DeliveryService new];
+        FirstManager *fm = [[FirstManager new]initWith:ds];
+        SecondManager *sm = [[SecondManager new]initWith:ds];
         
         while (TRUE) {
             // Loop forever
@@ -39,8 +40,10 @@ int main(int argc, const char * argv[]) {
             // Take the first word of the command as the size, and the rest as the toppings
             NSArray *commandWords = [inputString componentsSeparatedByString:@" "];
             
+            if ([commandWords[0] compare:@"show"] == NSOrderedSame) {
+                [ds recordPizza];
+            }
             // And then send some message to the kitchen...
-            
             restaurantKitchen.kitchenDelegate = fm;
             //restaurantKitchen.kitchenDelegate = sm;
             [restaurantKitchen getOrder:commandWords];

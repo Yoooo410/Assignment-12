@@ -7,10 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Kitchen.h"
-#import "FirstManager.h"
-#import "SecondManager.h"
-#import "DeliveryService.h"
+#import "Pizza.h"
 
 
 @interface DeliveryCar : NSObject

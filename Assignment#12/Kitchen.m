@@ -25,15 +25,15 @@
     
     for (int i = 0; i < inputUser.count; i++) {
         
-        if ([inputUser[i] compare:@"pepperoni"] == NSOrderedSame) {
-            [Kitchen largePepperoni];
-        }
-        
-        else if ([inputUser[i] compare:@"small"] == NSOrderedSame) {
+        if ([inputUser[i] compare:@"small"] == NSOrderedSame) {
             
             if ([inputUser[i] compare:@"meatLover"] == NSOrderedSame) {
                 [Kitchen meatLoverWithSize:kSmall];
             }
+            else if ([inputUser[i] compare:@"pepperoni"] == NSOrderedSame) {
+                [Kitchen largePepperoni];
+            }
+            
             else {
                 [self makePizzaWithSize:kSmall toppings:inputUser];
             }
@@ -44,6 +44,11 @@
             if ([inputUser[i] compare:@"meatLover"] == NSOrderedSame) {
                 [Kitchen meatLoverWithSize:kMedium];
             }
+            
+            else if ([inputUser[i] compare:@"pepperoni"] == NSOrderedSame) {
+                [Kitchen largePepperoni];
+            }
+            
             else {
                 [self makePizzaWithSize:kMedium toppings:inputUser];
             }
@@ -54,11 +59,15 @@
             if ([inputUser[i] compare:@"meatLover"] == NSOrderedSame) {
                 [Kitchen meatLoverWithSize:kLarge];
             }
+            
+            else if ([inputUser[i] compare:@"pepperoni"] == NSOrderedSame) {
+                [Kitchen largePepperoni];
+            }
+            
             else {
                 [self makePizzaWithSize:kLarge toppings:inputUser];
             }
         }
-
     }
 }
 
@@ -76,15 +85,18 @@
             return pizza;
         }
         else {
-            return [[Pizza new] init:size toppings:toppings];
+            Pizza *pizza = [[Pizza new] init:size toppings:toppings];
+            
+            if ([self.kitchenDelegate respondsToSelector:@selector(kitchenDidMakePizza:)]) {
+                [self.kitchenDelegate kitchenDidMakePizza:pizza];
+            }
+            return pizza;
+           // return [[Pizza new] init:size toppings:toppings];
         }
     }
     else {
         return nil;
     }
-
-    
-    
 }
 
 

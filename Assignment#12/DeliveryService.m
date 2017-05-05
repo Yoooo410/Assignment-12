@@ -10,15 +10,26 @@
 
 @implementation DeliveryService
 
-- (void) deliverPizza:(Pizza *)pizza {
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _pizzaInformation = [NSMutableArray array];
+    }
+    return self;
 }
 
-- (void) recordPizza:(NSArray *)deliveredPizza {
-    
-    deliveredPizza = _pizzaInformation;
-    
-    for (int i = 0; i < deliveredPizza.count; i++) {
-        NSLog(@"%@",deliveredPizza[i]);
+- (void) deliverPizza:(Pizza *)pizza {
+    [_pizzaInformation addObject:pizza];
+    DeliveryCar *dc = [DeliveryCar new];
+    [dc deliverPizza:pizza];
+}
+
+- (void) recordPizza {
+    NSLog(@"%ld",_pizzaInformation.count);
+    for (int i = 0; i < _pizzaInformation.count; i++) {
+        //NSLog(@"%@",[_pizzaInformation[i] showOrder]);
+        [_pizzaInformation[i] showOrder];
     }
 }
 

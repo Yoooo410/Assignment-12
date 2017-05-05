@@ -7,16 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Kitchen.h"
-#import "FirstManager.h"
-#import "SecondManager.h"
+#import "Pizza.h"
+#import "DeliveryCar.h"
 
 
 @interface DeliveryService : NSObject
 
-@property NSArray *pizzaInformation;
+@property NSMutableArray *pizzaInformation;
 
 - (void) deliverPizza:(Pizza *)pizza;
-- (void) recordPizza:(NSArray *)deliveredPizza;
+- (void) recordPizza;
 
 @end

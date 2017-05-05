@@ -10,6 +10,15 @@
 
 @implementation FirstManager
 
+- (instancetype)initWith: (DeliveryService *)instance
+{
+    self = [super init];
+    if (self) {
+        _instance = instance;
+    }
+    return self;
+}
+
 - (BOOL) kitchen:(Kitchen *)kitchen shouldMakePizzaOfSize:(PizzaSize)size andToppings:(NSArray *)toppings{
     
     BOOL flag = NO;
@@ -31,6 +40,7 @@
 }
 
 - (void) kitchenDidMakePizza:(Pizza *)pizza{
+    [_instance deliverPizza:pizza];
 }
 
 @end
